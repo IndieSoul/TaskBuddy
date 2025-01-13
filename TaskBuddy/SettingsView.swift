@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = true
+    @AppStorage("theme") private var theme = "Light"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                Section(header: Text("Preferences")) {
+                    Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                    Picker("Theme", selection: $theme) {
+                        Text("Light").tag("Light")
+                        Text("Dark").tag("Dark")
+                        Text("System").tag("System")
+                    }
+                }
+            }
+            .navigationTitle("Settings")
+        }
     }
 }
 
